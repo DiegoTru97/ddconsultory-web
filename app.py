@@ -1,6 +1,5 @@
 import os
-import smtplib
-from email.message import EmailMessage
+import requests
 from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
@@ -21,53 +20,38 @@ def contacto():
         mensaje = datos.get('mensaje')
 
         if not nombre or not mensaje:
-            print("Error: Datos incompletos enviados por el cliente.")
-            return jsonify({"status": "error", "message": "Datos incompletos"}), 400
+            return jsonify({"status": "error", "message": "Faltan datos obligatorios."}), 400
 
-        # Credenciales seguras (Variables de entorno)
-        remitente = os.environ.get('EMAIL_USER')
-        password = os.environ.get('EMAIL_PASS')
-        destinatario = 'diegotru1230@gmail.com'
+        # La URL secreta que te dio Formspree (se saca de las variables de entorno)
+        formspree_url = os.environ.get('FORMSPREE_URL')
 
-        # Si no hay credenciales, simular el envío (para pruebas locales)
-        if not remitente or not password:
-            print(f"MENSAJE SIMULADO (Faltan credenciales): De {nombre} - {mensaje}")
-            return jsonify({"status": "success", "message": "Simulado correctamente."}), 200
+        if not formspree_url:
+            print(f"SIMULACIÓN: No se configuró FORMSPREE_URL en Render. Mensaje: {mensaje}")
+            return jsonify({"status": "success", "message": "Simulado (Falta URL de Formspree)"}), 200
 
-        print(f"Preparando correo de {nombre} usando la cuenta {remitente}...")
+        print(f"Enviando solicitud a Formspree para {nombre}...")
 
-        # Configurar el correo
-        msg = EmailMessage()
-        msg['Subject'] = f'Nueva solicitud en DDConsultory: {servicio}'
-        msg['From'] = remitente
-        msg['To'] = destinatario
+        # Preparamos los datos para la API
+        data_to_send = {
+            "name": nombre,
+            "servicio": servicio,
+            "message": mensaje,
+            "_subject": f"DDConsultory - Interés en {servicio}"
+        }
 
-        cuerpo_correo = f"""
-        ¡Hola Diego! Tienes un nuevo mensaje desde tu sitio web DDConsultory.
+        # Enviamos los datos usando HTTP (Puerto 443) en vez de SMTP
+        response = requests.post(formspree_url, json=data_to_send)
 
-        Detalles del cliente:
-        ----------------------------------------
-        Nombre: {nombre}
-        Servicio de interés: {servicio}
-
-        Mensaje del cliente:
-        ----------------------------------------
-        {mensaje}
-        """
-        msg.set_content(cuerpo_correo)
-
-        # Enviar el correo conectándose a Gmail
-        print("Conectando con smtp.gmail.com...")
-        with smtplib.SMTP_SSL('smtp.gmail.com', 465, timeout=10) as smtp:
-            smtp.login(remitente, password)
-            smtp.send_message(msg)
-            print("¡Mensaje enviado exitosamente!")
-
-        return jsonify({"status": "success", "message": "Mensaje recibido correctamente"}), 200
+        if response.status_code == 200:
+            print("¡Mensaje enviado a través de Formspree exitosamente!")
+            return jsonify({"status": "success", "message": "Mensaje enviado"}), 200
+        else:
+            print(f"Error en Formspree: {response.text}")
+            return jsonify({"status": "error", "message": "Fallo la API de correo"}), 500
 
     except Exception as e:
-        print(f"ERROR: {e}")
-        return jsonify({"status": "error", "message": "Hubo un problema al procesar el mensaje."}), 500
+        print(f"ERROR: {str(e)}")
+        return jsonify({"status": "error", "message": "Error interno del servidor."}), 500
 
 
 if __name__ == '__main__':
