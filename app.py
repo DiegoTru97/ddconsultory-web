@@ -17,29 +17,32 @@ def contacto():
         datos = request.get_json()
         nombre = datos.get('nombre')
         servicio = datos.get('servicio')
+        contacto_info = datos.get('contacto_info')  # RECUPERAMOS EL CAMPO DE CONTACTO
         mensaje = datos.get('mensaje')
 
-        if not nombre or not mensaje:
-            return jsonify({"status": "error", "message": "Faltan datos obligatorios."}), 400
+        # Validamos que nos manden lo importante
+        if not nombre or not mensaje or not contacto_info:
+            return jsonify(
+                {"status": "error", "message": "Faltan datos obligatorios (Nombre, Contacto o Mensaje)."}), 400
 
-        # La URL secreta que te dio Formspree (se saca de las variables de entorno)
+        # La URL secreta que te dio Formspree
         formspree_url = os.environ.get('FORMSPREE_URL')
 
         if not formspree_url:
-            print(f"SIMULACIÓN: No se configuró FORMSPREE_URL en Render. Mensaje: {mensaje}")
+            print(f"SIMULACIÓN: No se configuró FORMSPREE_URL. Mensaje de {nombre} ({contacto_info})")
             return jsonify({"status": "success", "message": "Simulado (Falta URL de Formspree)"}), 200
 
         print(f"Enviando solicitud a Formspree para {nombre}...")
 
-        # Preparamos los datos para la API
+        # Preparamos los datos EXACTAMENTE como quieres que se lean en tu correo
         data_to_send = {
-            "name": nombre,
-            "servicio": servicio,
-            "message": mensaje,
-            "_subject": f"DDConsultory - Interés en {servicio}"
+            "Nombre_del_Cliente": nombre,
+            "Servicio_de_Interes": servicio,
+            "Medio_de_Contacto": contacto_info,  # AHORA SÍ LO ENVIAMOS A FORMSPREE
+            "Mensaje": mensaje,
+            "_subject": f"DDConsultory - Interés en {servicio} ({nombre})"
         }
 
-        # Enviamos los datos usando HTTP (Puerto 443) en vez de SMTP
         response = requests.post(formspree_url, json=data_to_send)
 
         if response.status_code == 200:
