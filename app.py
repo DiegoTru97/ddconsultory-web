@@ -1,6 +1,5 @@
 import os
-import smtplib
-from email.message import EmailMessage
+import requests
 from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
@@ -21,62 +20,39 @@ def contacto():
         mensaje = datos.get('mensaje')
 
         if not nombre or not mensaje:
-            print("Error: Datos incompletos enviados por el cliente.")
-            return jsonify({"status": "error", "message": "Datos incompletos"}), 400
+            return jsonify({"status": "error", "message": "Faltan datos obligatorios."}), 400
 
-        remitente = os.environ.get('EMAIL_USER')
-        password = os.environ.get('EMAIL_PASS')
-        destinatario = 'diegotru1230@gmail.com'
+        # La URL secreta que te dio Formspree (se saca de las variables de entorno)
+        formspree_url = os.environ.get('FORMSPREE_URL')
 
-        if not remitente or not password:
-            print(f"MENSAJE SIMULADO (Faltan credenciales en Render): De {nombre} - {mensaje}")
-            return jsonify({"status": "success", "message": "Simulado correctamente. (Faltan credenciales)"}), 200
+        if not formspree_url:
+            print(f"SIMULACIÓN: No se configuró FORMSPREE_URL en Render. Mensaje: {mensaje}")
+            return jsonify({"status": "success", "message": "Simulado (Falta URL de Formspree)"}), 200
 
-        print(f"Preparando correo de {nombre} usando la cuenta {remitente}...")
+        print(f"Enviando solicitud a Formspree para {nombre}...")
 
-        msg = EmailMessage()
-        msg['Subject'] = f'Nueva solicitud en DDConsultory: {servicio}'
-        msg['From'] = remitente
-        msg['To'] = destinatario
+        # Preparamos los datos para la API
+        data_to_send = {
+            "name": nombre,
+            "servicio": servicio,
+            "message": mensaje,
+            "_subject": f"DDConsultory - Interés en {servicio}"
+        }
 
-        cuerpo_correo = f"""
-        ¡Hola Diego! Tienes un nuevo mensaje desde tu sitio web DDConsultory.
+        # Enviamos los datos usando HTTP (Puerto 443) en vez de SMTP
+        response = requests.post(formspree_url, json=data_to_send)
 
-        Detalles del cliente:
-        ----------------------------------------
-        Nombre: {nombre}
-        Servicio de interés: {servicio}
+        if response.status_code == 200:
+            print("¡Mensaje enviado a través de Formspree exitosamente!")
+            return jsonify({"status": "success", "message": "Mensaje enviado"}), 200
+        else:
+            print(f"Error en Formspree: {response.text}")
+            return jsonify({"status": "error", "message": "Fallo la API de correo"}), 500
 
-        Mensaje del cliente:
-        ----------------------------------------
-        {mensaje}
-        """
-        msg.set_content(cuerpo_correo)
-
-        print("Intentando conectar con smtp.gmail.com por el puerto 465 (SSL)...")
-        with smtplib.SMTP_SSL('smtp.gmail.com', 465, timeout=10) as smtp:
-            print("Conexión SMTP exitosa. Intentando login...")
-            smtp.login(remitente, password)
-            print("Login exitoso. Enviando mensaje...")
-            smtp.send_message(msg)
-            print("¡Mensaje enviado al servidor de Gmail exitosamente!")
-
-        return jsonify({"status": "success", "message": "Mensaje recibido correctamente"}), 200
-
-    except smtplib.SMTPAuthenticationError as e:
-        print(f"ERROR DE AUTENTICACIÓN (Contraseña incorrecta o bloqueada por Google): {e}")
-        return jsonify(
-            {"status": "error", "message": "Error de autenticación con el correo. Verifica las contraseñas."}), 500
-    except smtplib.SMTPException as e:
-        print(f"ERROR SMTP: {e}")
-        return jsonify({"status": "error", "message": "Error de conexión con el servidor de correos."}), 500
     except Exception as e:
-        print(f"ERROR GENERAL INESPERADO: {e}")
-        return jsonify({"status": "error", "message": "Hubo un problema interno en el servidor."}), 500
-    finally:
-        print("--- FIN DE LA SOLICITUD ---")
+        print(f"ERROR: {str(e)}")
+        return jsonify({"status": "error", "message": "Error interno del servidor."}), 500
 
 
 if __name__ == '__main__':
-    print("Iniciando el servidor en modo Debug...")
     app.run(debug=True, port=5000)
