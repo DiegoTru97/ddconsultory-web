@@ -384,7 +384,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
 
-                <!-- Columna Izquierda: Perfil Visual y Contacto (Ocupa 4 columnas) -->
+                <!-- Columna Izquierda: Perfil Visual y Contacto -->
                 <div class="lg:col-span-4 relative group sticky top-24">
                     <div class="absolute -inset-1 bg-gradient-to-b from-primary/50 to-secondary/30 rounded-3xl blur-md opacity-25 group-hover:opacity-50 transition duration-1000"></div>
                     <div class="relative bg-dark p-8 rounded-3xl border border-white/10 flex flex-col items-center text-center shadow-2xl">
@@ -421,7 +421,7 @@
                     </div>
                 </div>
 
-                <!-- Columna Derecha: Información Profesional (Ocupa 8 columnas) -->
+                <!-- Columna Derecha: Información Profesional -->
                 <div class="lg:col-span-8 space-y-12">
 
                     <!-- Sobre mí - Resumen -->
@@ -607,6 +607,7 @@
                     <p class="text-gray-400">Cuéntame qué necesitas y me pondré en contacto contigo para darte una solución a medida.</p>
                 </div>
 
+                <!-- Formulario actualizado con el campo de contacto -->
                 <form id="form-contacto" class="space-y-6 relative z-10" onsubmit="enviarFormulario(event)">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
@@ -624,6 +625,18 @@
                             </select>
                         </div>
                     </div>
+
+                    <!-- NUEVO CAMPO: Teléfono o Correo -->
+                    <div>
+                        <label for="contacto_info" class="block text-sm font-medium text-gray-400 mb-2">Teléfono o Correo de contacto</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="ph ph-phone text-gray-500"></i>
+                            </div>
+                            <input type="text" id="contacto_info" required class="w-full bg-darker border border-white/10 rounded-xl pl-11 pr-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all" placeholder="Ej. 2291234567 o mi@correo.com">
+                        </div>
+                    </div>
+
                     <div>
                         <label for="message" class="block text-sm font-medium text-gray-400 mb-2">¿Cómo puedo ayudarte?</label>
                         <textarea id="message" rows="4" required class="w-full bg-darker border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all resize-none" placeholder="Describe brevemente el problema de tu equipo o lo que necesitas comprar..."></textarea>
@@ -705,7 +718,6 @@
             }
         });
 
-        // Script actualizado para manejar errores del servidor Python
         async function enviarFormulario(event) {
             event.preventDefault();
 
@@ -717,6 +729,7 @@
             const datos = {
                 nombre: document.getElementById('name').value,
                 servicio: document.getElementById('service').value,
+                contacto_info: document.getElementById('contacto_info').value,
                 mensaje: document.getElementById('message').value
             };
 
@@ -732,18 +745,15 @@
                     body: JSON.stringify(datos)
                 });
 
-                const data = await respuesta.json(); // Leer lo que nos manda Python
+                const data = await respuesta.json();
 
                 if(respuesta.ok) {
-                    // Si el servidor devolvió status 200 (éxito)
                     msg.classList.remove('hidden');
                     form.reset();
                 } else {
-                    // Si el servidor devolvió un error (400, 500)
-                    alert("No se pudo enviar el mensaje:\n" + (data.message || "Error desconocido en el servidor."));
+                    alert("No se pudo enviar el mensaje:\n" + (data.message || "Error en el servidor."));
                 }
             } catch (error) {
-                // Esto solo pasa si se pierde la conexión a internet completamente
                 alert("Error de conexión. Revisa tu internet e intenta de nuevo.");
                 console.error(error);
             } finally {
