@@ -27,63 +27,42 @@
     </script>
     <!-- Fuentes de Google -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Iconos de Phosphor (Alternativa moderna a FontAwesome) -->
+    <!-- Iconos de Phosphor -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <!-- Estilos personalizados para animaciones y efectos -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0f172a; /* color dark */
+            background-color: #0f172a;
             color: #f8fafc;
         }
-
-        /* Efecto de cristal esmerilado para la navegación */
         .glass-nav {
             background: rgba(15, 23, 42, 0.7);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-
-        /* Gradiente animado para texto */
         .text-gradient {
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-image: linear-gradient(to right, #3b82f6, #8b5cf6);
         }
-
-        /* Animación suave para la aparición de elementos */
         .fade-in-up {
             animation: fadeInUp 0.8s ease-out forwards;
             opacity: 0;
             transform: translateY(20px);
         }
-
         @keyframes fadeInUp {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-
-        /* Retrasos para las animaciones en cascada */
         .delay-100 { animation-delay: 100ms; }
         .delay-200 { animation-delay: 200ms; }
         .delay-300 { animation-delay: 300ms; }
-
-        /* Efecto hover brillante para tarjetas */
-        .card-glow {
-            transition: all 0.3s ease;
-        }
-        .card-glow:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.5);
-            border-color: rgba(59, 130, 246, 0.5);
-        }
-
-        /* Forma de fondo borrosa (blob) para dar profundidad */
         .bg-blob {
             position: absolute;
             filter: blur(100px);
@@ -175,34 +154,20 @@
                 </div>
             </div>
         </div>
-
-        <!-- Decoración de fondo en Hero -->
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-6xl -z-10 opacity-20 pointer-events-none">
-            <svg viewBox="0 0 1024 1024" class="absolute left-1/2 top-1/2 -z-10 h-[64rem] w-[64rem] -translate-x-1/2 -translate-y-1/2 [mask-image:radial-gradient(closest-side,white,transparent)]" aria-hidden="true">
-                <circle cx="512" cy="512" r="512" fill="url(#gradient)" fill-opacity="0.7"></circle>
-                <defs>
-                    <radialGradient id="gradient">
-                        <stop stop-color="#3b82f6"></stop>
-                        <stop offset="1" stop-color="#8b5cf6"></stop>
-                    </radialGradient>
-                </defs>
-            </svg>
-        </div>
     </section>
 
-    <!-- Sección Paquetes y Precios (NUEVO) -->
-    <section id="paquetes" class="py-24 relative bg-dark border-t border-white/5">
-        <!-- Decoración de fondo -->
+    <!-- Sección Servicios (Sin precios fijos) -->
+    <section id="servicios" class="py-24 relative bg-dark border-t border-white/5">
         <div class="absolute top-0 right-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
              <div class="bg-blob bg-primary/10 w-96 h-96 top-0 left-1/4 -translate-y-1/2"></div>
         </div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-primary font-semibold tracking-wide uppercase text-sm mb-2">Planes Preestablecidos</h2>
-                <h3 class="text-3xl md:text-5xl font-bold">Soluciones claras, sin sorpresas</h3>
+                <h2 class="text-primary font-semibold tracking-wide uppercase text-sm mb-2">Soluciones y Paquetes</h2>
+                <h3 class="text-3xl md:text-5xl font-bold">Servicios adaptados a ti</h3>
                 <p class="mt-4 text-gray-400 max-w-2xl mx-auto text-lg">
-                    Elige el paquete que mejor se adapte a tus necesidades. Precios transparentes desde el primer momento.
+                    Cada equipo y usuario es diferente. Conoce las áreas en las que puedo ayudarte y contáctame para diseñar una solución a tu medida.
                 </p>
             </div>
 
@@ -212,92 +177,95 @@
                 <div class="bg-darker border border-white/10 rounded-3xl p-8 relative flex flex-col hover:border-gray-500 transition-all duration-300 transform hover:-translate-y-2">
                     <div class="mb-6">
                         <h4 class="text-xl font-bold text-white mb-2">Mantenimiento Básico</h4>
-                        <p class="text-gray-400 text-sm">Ideal para equipos que sienten un poco lentos por el uso diario.</p>
+                        <p class="text-gray-400 text-sm">Ideal para equipos que se sienten lentos por el uso diario o acumulación de archivos.</p>
                     </div>
-                    <div class="mb-6">
-                        <span class="text-4xl font-extrabold text-white">$450</span>
-                        <span class="text-gray-500 text-sm">MXN</span>
+                    <div class="mb-6 pb-6 border-b border-white/10">
+                        <span class="text-lg font-semibold text-accent flex items-center gap-2">
+                            <i class="ph-fill ph-check-circle"></i> Cotización personalizada
+                        </span>
                     </div>
                     <ul class="space-y-4 mb-8 flex-grow">
                         <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i class="ph-fill ph-check-circle text-primary mt-0.5"></i> Limpieza física básica de polvo
+                            <i class="ph-bold ph-caret-right text-primary mt-0.5"></i> Limpieza física básica de polvo
                         </li>
                         <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i class="ph-fill ph-check-circle text-primary mt-0.5"></i> Optimización de Windows/Mac
+                            <i class="ph-bold ph-caret-right text-primary mt-0.5"></i> Optimización de sistema (Windows/Mac)
                         </li>
                         <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i class="ph-fill ph-check-circle text-primary mt-0.5"></i> Eliminación de virus y malware
+                            <i class="ph-bold ph-caret-right text-primary mt-0.5"></i> Eliminación de virus y malware
                         </li>
                         <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i class="ph-fill ph-check-circle text-primary mt-0.5"></i> Actualización de drivers
+                            <i class="ph-bold ph-caret-right text-primary mt-0.5"></i> Actualización de drivers
                         </li>
                     </ul>
                     <a href="#contacto" class="w-full py-3 bg-white/5 hover:bg-white/10 rounded-xl text-center text-white font-medium transition-colors border border-white/10 mt-auto">
-                        Elegir Plan
+                        Solicitar Diagnóstico
                     </a>
                 </div>
 
                 <!-- Paquete 2 (Destacado) -->
                 <div class="bg-gradient-to-b from-darker to-dark border-2 border-primary rounded-3xl p-8 relative flex flex-col shadow-[0_0_30px_rgba(59,130,246,0.15)] transform md:-translate-y-4">
                     <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-white text-xs font-bold uppercase tracking-wider py-1 px-4 rounded-full">
-                        Más Popular
+                        Más Solicitado
                     </div>
                     <div class="mb-6 mt-2">
                         <h4 class="text-xl font-bold text-white mb-2">Actualización Pro</h4>
-                        <p class="text-gray-400 text-sm">Revive tu computadora antigua y hazla hasta 10x más rápida.</p>
+                        <p class="text-gray-400 text-sm">Revive tu computadora antigua instalando componentes modernos.</p>
                     </div>
-                    <div class="mb-6">
-                        <span class="text-4xl font-extrabold text-white">$850</span>
-                        <span class="text-gray-500 text-sm">MXN <span class="text-xs">*Solo mano de obra</span></span>
+                    <div class="mb-6 pb-6 border-b border-white/10">
+                        <span class="text-lg font-semibold text-white flex items-center gap-2">
+                            <i class="ph-fill ph-cpu text-primary"></i> Contáctame para evaluar tu equipo
+                        </span>
                     </div>
                     <ul class="space-y-4 mb-8 flex-grow">
                         <li class="flex items-start gap-3 text-sm text-white">
-                            <i class="ph-fill ph-check-circle text-secondary mt-0.5"></i> <span class="font-semibold">Todo lo del plan básico</span>
+                            <i class="ph-fill ph-check-circle text-secondary mt-0.5"></i> <span class="font-semibold">Todo lo del mantenimiento básico</span>
                         </li>
                         <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i class="ph-fill ph-check-circle text-secondary mt-0.5"></i> Instalación de disco SSD o RAM
+                            <i class="ph-bold ph-caret-right text-secondary mt-0.5"></i> Instalación de disco SSD o Memoria RAM
                         </li>
                         <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i class="ph-fill ph-check-circle text-secondary mt-0.5"></i> Clonación o Formateo Limpio
+                            <i class="ph-bold ph-caret-right text-secondary mt-0.5"></i> Clonación de disco o Formateo Limpio
                         </li>
                         <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i class="ph-fill ph-check-circle text-secondary mt-0.5"></i> Respaldo de datos (hasta 100GB)
+                            <i class="ph-bold ph-caret-right text-secondary mt-0.5"></i> Respaldo de datos seguro
                         </li>
                         <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i class="ph-fill ph-check-circle text-secondary mt-0.5"></i> Instalación de Office
+                            <i class="ph-bold ph-caret-right text-secondary mt-0.5"></i> Instalación de paquetería Office
                         </li>
                     </ul>
                     <a href="#contacto" class="w-full py-3 bg-primary hover:bg-blue-600 rounded-xl text-center text-white font-medium transition-colors shadow-lg shadow-primary/30 mt-auto">
-                        Elegir Plan
+                        Cotizar Actualización
                     </a>
                 </div>
 
                 <!-- Paquete 3 -->
                 <div class="bg-darker border border-white/10 rounded-3xl p-8 relative flex flex-col hover:border-gray-500 transition-all duration-300 transform hover:-translate-y-2">
                     <div class="mb-6">
-                        <h4 class="text-xl font-bold text-white mb-2">Asesoría Integral</h4>
-                        <p class="text-gray-400 text-sm">Acompañamiento técnico, configuración de nubes y recomendaciones de compra.</p>
+                        <h4 class="text-xl font-bold text-white mb-2">Asesoría y Nube</h4>
+                        <p class="text-gray-400 text-sm">Acompañamiento técnico, configuración de ecosistemas y soporte remoto.</p>
                     </div>
-                    <div class="mb-6">
-                        <span class="text-4xl font-extrabold text-white">$300</span>
-                        <span class="text-gray-500 text-sm">MXN / hora</span>
+                    <div class="mb-6 pb-6 border-b border-white/10">
+                        <span class="text-lg font-semibold text-gray-300 flex items-center gap-2">
+                            <i class="ph-fill ph-clock"></i> Servicio por hora o proyecto
+                        </span>
                     </div>
                     <ul class="space-y-4 mb-8 flex-grow">
                         <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i class="ph-fill ph-check-circle text-accent mt-0.5"></i> Asesoría de compra (PCs/Gadgets)
+                            <i class="ph-bold ph-caret-right text-accent mt-0.5"></i> Asesoría de compra (PCs/Gadgets)
                         </li>
                         <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i class="ph-fill ph-check-circle text-accent mt-0.5"></i> Configuración de nubes (Drive/iCloud)
+                            <i class="ph-bold ph-caret-right text-accent mt-0.5"></i> Configuración de nubes (Drive/iCloud/OneDrive)
                         </li>
                         <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i class="ph-fill ph-check-circle text-accent mt-0.5"></i> Conexión y configuración de redes Wi-Fi
+                            <i class="ph-bold ph-caret-right text-accent mt-0.5"></i> Optimización y expansión de redes Wi-Fi
                         </li>
                         <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i class="ph-fill ph-check-circle text-accent mt-0.5"></i> Soporte remoto vía AnyDesk/TeamViewer
+                            <i class="ph-bold ph-caret-right text-accent mt-0.5"></i> Soporte rápido remoto (AnyDesk/TeamViewer)
                         </li>
                     </ul>
                     <a href="#contacto" class="w-full py-3 bg-white/5 hover:bg-white/10 rounded-xl text-center text-white font-medium transition-colors border border-white/10 mt-auto">
-                        Contactar
+                        Agendar Asesoría
                     </a>
                 </div>
             </div>
@@ -306,7 +274,7 @@
             <div class="mt-16 max-w-3xl mx-auto bg-darker rounded-2xl border border-white/5 p-6 flex flex-col sm:flex-row items-center justify-between gap-6">
                 <div>
                     <h5 class="text-white font-medium mb-2 flex items-center gap-2">
-                        <i class="ph-fill ph-wallet text-xl text-primary"></i> Métodos de pago aceptados
+                        <i class="ph-fill ph-wallet text-xl text-primary"></i> Facilidades de pago
                     </h5>
                     <div class="flex flex-wrap gap-3">
                         <span class="px-3 py-1 bg-white/5 rounded-lg text-sm text-gray-300 border border-white/5 flex items-center gap-1.5"><i class="ph ph-money text-lg"></i> Efectivo</span>
@@ -328,70 +296,233 @@
         </div>
     </section>
 
-    <!-- Sección Sobre Mí -->
-    <section id="sobre-mi" class="py-24 relative bg-darker border-y border-white/5">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <!-- Imagen o Representación visual -->
-                <div class="relative group">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
-                    <div class="relative bg-dark p-8 rounded-2xl border border-white/10 aspect-square flex flex-col items-center justify-center text-center shadow-xl">
-                        <div class="w-32 h-32 bg-gray-800 rounded-full mb-6 border-4 border-white/10 flex items-center justify-center overflow-hidden">
-                            <!-- Aquí puedes poner tu foto real en un futuro reemplazando el ícono por una etiqueta <img src="..." /> -->
-                            <i class="ph-fill ph-user-circle text-8xl text-gray-500"></i>
+    <!-- Sección Productos Recomendados (NUEVA) -->
+    <section id="productos" class="py-24 relative bg-darker border-t border-white/5 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                <div class="max-w-2xl">
+                    <h2 class="text-secondary font-semibold tracking-wide uppercase text-sm mb-2">Mi Setup y Recomendaciones</h2>
+                    <h3 class="text-3xl md:text-5xl font-bold mb-4">Hardware en el que confío</h3>
+                    <p class="text-gray-400 text-lg">
+                        Como consultor, pruebo decenas de dispositivos. Aquí tienes una selección del hardware y periféricos que utilizo en mi día a día y que recomiendo a mis clientes por su calidad y durabilidad.
+                    </p>
+                </div>
+                <div class="shrink-0">
+                    <a href="#contacto" class="inline-flex items-center gap-2 text-primary hover:text-white transition-colors font-medium">
+                        Consultoría de compra <i class="ph-bold ph-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Grid de Productos -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Producto 1: SSD -->
+                <div class="bg-dark rounded-2xl border border-white/10 overflow-hidden group hover:border-primary/50 transition-colors">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=600&q=80" alt="Almacenamiento SSD" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-white border border-white/20">
+                            Almacenamiento
                         </div>
-                        <h3 class="text-2xl font-bold text-white mb-2">Hola, soy tu consultor TI</h3>
-                        <p class="text-gray-400 max-w-sm">Apasionado por la tecnología y dedicado a simplificar tu vida digital, cuidando tu presupuesto.</p>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold text-white mb-2">Discos de Estado Sólido (SSD)</h4>
+                        <p class="text-gray-400 text-sm mb-6 line-clamp-3">
+                            La actualización número uno que recomiendo. Cambiar tu viejo disco duro por un SSD NVMe o SATA de marcas como Samsung, Kingston o WD hace que tu equipo encienda y reaccione en segundos.
+                        </p>
+                        <a href="https://www.amazon.com.mx/" target="_blank" class="inline-flex items-center justify-center gap-2 w-full py-2.5 bg-white/5 hover:bg-white/10 text-white rounded-xl transition-colors text-sm font-medium border border-white/10">
+                            Ver opciones <i class="ph-bold ph-shopping-cart-simple"></i>
+                        </a>
                     </div>
                 </div>
 
-                <!-- Contenido de Sobre Mí -->
-                <div>
-                    <h2 class="text-primary font-semibold tracking-wide uppercase text-sm mb-2">Conoce al experto</h2>
-                    <h3 class="text-3xl md:text-5xl font-bold mb-6">Filosofía de trabajo clara y transparente</h3>
-                    <p class="text-gray-400 text-lg mb-6 leading-relaxed">
-                        Mi objetivo no es solo reparar o instalar, sino empoderarte tecnológicamente. Me enfoco en explicar los problemas y soluciones de manera sencilla para que tomes las mejores decisiones para tu equipo.
-                    </p>
-
-                    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
-                        <div class="border-l-2 border-primary pl-4">
-                            <h4 class="text-white font-bold text-xl">Honestidad</h4>
-                            <p class="text-sm text-gray-500 mt-1">Recomendaciones basadas en tus necesidades reales, no en ventas ni comisiones.</p>
-                        </div>
-                        <div class="border-l-2 border-secondary pl-4">
-                            <h4 class="text-white font-bold text-xl">Precisión</h4>
-                            <p class="text-sm text-gray-500 mt-1">Diagnósticos certeros, trabajo técnico limpio y organizado en todo momento.</p>
+                <!-- Producto 2: Mouse Ergonómico -->
+                <div class="bg-dark rounded-2xl border border-white/10 overflow-hidden group hover:border-secondary/50 transition-colors">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c3c9c?auto=format&fit=crop&w=600&q=80" alt="Mouse Ergonómico" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-white border border-white/20">
+                            Periféricos
                         </div>
                     </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold text-white mb-2">Logitech Serie MX (Master/Anywhere)</h4>
+                        <p class="text-gray-400 text-sm mb-6 line-clamp-3">
+                            Si pasas más de 4 horas al día frente a la computadora, necesitas cuidar tus muñecas. La serie MX de Logitech ofrece la mejor ergonomía y atajos personalizables para productividad.
+                        </p>
+                        <a href="https://www.amazon.com.mx/" target="_blank" class="inline-flex items-center justify-center gap-2 w-full py-2.5 bg-white/5 hover:bg-white/10 text-white rounded-xl transition-colors text-sm font-medium border border-white/10">
+                            Ver opciones <i class="ph-bold ph-shopping-cart-simple"></i>
+                        </a>
+                    </div>
+                </div>
 
-                    <!-- Redes y Contacto Directo (NUEVO) -->
-                    <div class="border-t border-white/10 pt-8">
-                        <h4 class="text-white font-medium mb-4">Sígueme o contáctame de forma directa:</h4>
-                        <div class="flex flex-wrap gap-4">
-                            <!-- Botón WhatsApp -->
-                            <a href="https://wa.me/521234567890" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-6 py-3 bg-[#25D366]/10 hover:bg-[#25D366]/20 border border-[#25D366]/30 text-[#25D366] rounded-xl font-medium transition-all group shadow-[0_0_15px_rgba(37,211,102,0.15)] hover:shadow-[0_0_25px_rgba(37,211,102,0.3)]">
+                <!-- Producto 3: Router Mesh -->
+                <div class="bg-dark rounded-2xl border border-white/10 overflow-hidden group hover:border-accent/50 transition-colors">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1544228807-6bb3a078b532?auto=format&fit=crop&w=600&q=80" alt="Sistemas Wi-Fi Mesh" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-white border border-white/20">
+                            Redes y Wi-Fi
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold text-white mb-2">Sistemas Wi-Fi Mesh</h4>
+                        <p class="text-gray-400 text-sm mb-6 line-clamp-3">
+                            ¿Problemas de señal en casa? Reemplazar el modem básico de tu compañía por un sistema de malla (Mesh) como TP-Link Deco o Eero de Amazon garantiza internet rápido en cada rincón.
+                        </p>
+                        <a href="https://www.amazon.com.mx/" target="_blank" class="inline-flex items-center justify-center gap-2 w-full py-2.5 bg-white/5 hover:bg-white/10 text-white rounded-xl transition-colors text-sm font-medium border border-white/10">
+                            Ver opciones <i class="ph-bold ph-shopping-cart-simple"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Sobre Mí (Actualizada con Perfil Profesional) -->
+    <section id="sobre-mi" class="py-24 relative bg-darker border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+
+                <!-- Columna Izquierda: Perfil Visual y Contacto (Ocupa 4 columnas en desktop) -->
+                <div class="lg:col-span-4 relative group sticky top-24">
+                    <div class="absolute -inset-1 bg-gradient-to-b from-primary/50 to-secondary/30 rounded-3xl blur-md opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+                    <div class="relative bg-dark p-8 rounded-3xl border border-white/10 flex flex-col items-center text-center shadow-2xl">
+
+                        <!-- Avatar -->
+                        <div class="w-40 h-40 bg-gray-800 rounded-full mb-6 border-4 border-darker shadow-inner overflow-hidden relative">
+                            <!-- SUSTITUYE ESTO POR TU FOTO REAL -->
+                            <i class="ph-fill ph-user-circle text-gray-600 text-[10rem] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></i>
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-white mb-1">Diego Trujillo Morales</h3>
+                        <p class="text-primary font-medium mb-6">Consultor TI & Soporte Técnico</p>
+
+                        <!-- Botones de Contacto Rápidos -->
+                        <div class="w-full space-y-3">
+                            <!-- Botón WhatsApp (Actualizado con tu número) -->
+                            <a href="https://wa.me/522291111365" target="_blank" rel="noopener noreferrer" class="w-full flex items-center justify-center gap-3 px-6 py-3.5 bg-[#25D366]/10 hover:bg-[#25D366] border border-[#25D366]/30 hover:border-[#25D366] text-[#25D366] hover:text-white rounded-xl font-medium transition-all group shadow-sm">
                                 <i class="ph-fill ph-whatsapp-logo text-2xl group-hover:scale-110 transition-transform"></i>
-                                WhatsApp
+                                Chatear en WhatsApp
                             </a>
+
+                            <!-- Botón LinkedIn -->
+                            <a href="https://www.linkedin.com/in/diego-trujillo-morales-1601a71a1/" target="_blank" rel="noopener noreferrer" class="w-full flex items-center justify-center gap-3 px-6 py-3.5 bg-[#0A66C2]/10 hover:bg-[#0A66C2] border border-[#0A66C2]/30 hover:border-[#0A66C2] text-[#0A66C2] hover:text-white rounded-xl font-medium transition-all group shadow-sm">
+                                <i class="ph-fill ph-linkedin-logo text-2xl group-hover:scale-110 transition-transform"></i>
+                                Conectar en LinkedIn
+                            </a>
+
                             <!-- Botón Instagram -->
-                            <!-- Nota: El fondo de Instagram usa un gradiente sutil simulando sus colores de marca -->
-                            <a href="https://instagram.com/TuUsuario" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-6 py-3 bg-gradient-to-tr from-[#f09433]/10 via-[#e6683c]/10 to-[#bc1888]/10 hover:from-[#f09433]/20 hover:via-[#e6683c]/20 hover:to-[#bc1888]/20 border border-[#bc1888]/30 text-white rounded-xl font-medium transition-all group shadow-[0_0_15px_rgba(225,48,108,0.15)] hover:shadow-[0_0_25px_rgba(225,48,108,0.3)]">
-                                <i class="ph-fill ph-instagram-logo text-2xl text-[#E1306C] group-hover:scale-110 transition-transform"></i>
-                                Instagram
+                            <a href="https://instagram.com/TuUsuario" target="_blank" rel="noopener noreferrer" class="w-full flex items-center justify-center gap-3 px-6 py-3.5 bg-gradient-to-r from-purple-500/10 to-pink-500/10 hover:from-purple-500 hover:to-pink-500 border border-pink-500/30 text-pink-500 hover:text-white rounded-xl font-medium transition-all group shadow-sm">
+                                <i class="ph-fill ph-instagram-logo text-2xl group-hover:scale-110 transition-transform"></i>
+                                Seguir en Instagram
                             </a>
                         </div>
-                        <p class="text-xs text-gray-500 mt-3">* Horario de atención: Lunes a Viernes de 9:00 AM a 6:00 PM</p>
                     </div>
+                </div>
+
+                <!-- Columna Derecha: Información Profesional (Ocupa 8 columnas en desktop) -->
+                <div class="lg:col-span-8 space-y-12">
+
+                    <!-- Sobre mí - Resumen -->
+                    <div>
+                        <h2 class="text-primary font-semibold tracking-wide uppercase text-sm mb-2">Conoce al experto</h2>
+                        <h3 class="text-3xl md:text-4xl font-bold mb-6">Optimizando tu mundo digital con honestidad y precisión.</h3>
+                        <p class="text-gray-400 text-lg leading-relaxed">
+                            Soy un profesional apasionado por la tecnología, dedicado a ofrecer soluciones integrales de soporte técnico, configuración de hardware y asesoría en ecosistemas digitales. Mi filosofía de trabajo se basa en la <strong>transparencia</strong>: mi objetivo no es solo resolver el problema inmediato, sino explicarte el "por qué" y empoderarte para que tomes las mejores decisiones tecnológicas a futuro, cuidando siempre tu presupuesto y necesidades reales.
+                        </p>
+                    </div>
+
+                    <!-- Grid de Experiencia y Educación -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                        <!-- Experiencia Profesional -->
+                        <div class="bg-dark rounded-2xl p-8 border border-white/5">
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center text-primary">
+                                    <i class="ph-fill ph-briefcase text-xl"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-white">Experiencia Destacada</h4>
+                            </div>
+
+                            <div class="space-y-6">
+                                <!-- Ítem de Experiencia 1 -->
+                                <div class="relative pl-6 border-l-2 border-primary/30 pb-2">
+                                    <div class="absolute w-3 h-3 bg-primary rounded-full -left-[7px] top-1.5"></div>
+                                    <h5 class="text-white font-semibold text-lg">Consultor Tecnológico Independiente</h5>
+                                    <span class="text-primary text-sm font-medium mb-2 block">DDConsultory | Actualidad</span>
+                                    <p class="text-gray-400 text-sm leading-relaxed">
+                                        Asesoría especializada en compra de equipos, actualización de hardware (SSD/RAM), instalación de sistemas operativos, y configuración de nubes para optimización de flujos de trabajo personales y empresariales.
+                                    </p>
+                                </div>
+
+                                <!-- Ítem de Experiencia 2 (Ejemplo, por favor reemplaza con tu info de LinkedIn) -->
+                                <div class="relative pl-6 border-l-2 border-primary/30">
+                                    <div class="absolute w-3 h-3 bg-darker border-2 border-primary rounded-full -left-[7px] top-1.5"></div>
+                                    <h5 class="text-white font-semibold text-lg">Especialista en Soporte TI</h5>
+                                    <span class="text-gray-500 text-sm font-medium mb-2 block">Empresa Anterior | Año - Año</span>
+                                    <p class="text-gray-400 text-sm leading-relaxed">
+                                        [Espacio para agregar un resumen de un rol anterior importante de tu LinkedIn: Mantenimiento preventivo, resolución de incidencias, etc.]
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Educación y Certificaciones -->
+                        <div class="bg-dark rounded-2xl p-8 border border-white/5">
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="w-10 h-10 rounded-lg bg-secondary/20 flex items-center justify-center text-secondary">
+                                    <i class="ph-fill ph-graduation-cap text-xl"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-white">Educación y Logros</h4>
+                            </div>
+
+                            <div class="space-y-6">
+                                <!-- Ítem de Educación (Reemplaza con tu título) -->
+                                <div class="relative pl-6 border-l-2 border-secondary/30 pb-2">
+                                    <div class="absolute w-3 h-3 bg-secondary rounded-full -left-[7px] top-1.5"></div>
+                                    <h5 class="text-white font-semibold text-lg">Licenciatura / Ingeniería en...</h5>
+                                    <span class="text-secondary text-sm font-medium mb-2 block">Universidad de... | Año de graduación</span>
+                                    <p class="text-gray-400 text-sm">
+                                        [Breve descripción de tu carrera o enfoque de estudios técnicos].
+                                    </p>
+                                </div>
+
+                                <!-- Certificación (Ejemplo) -->
+                                <div class="relative pl-6 border-l-2 border-secondary/30">
+                                    <div class="absolute w-3 h-3 bg-darker border-2 border-secondary rounded-full -left-[7px] top-1.5"></div>
+                                    <h5 class="text-white font-semibold text-lg">Certificación Técnica</h5>
+                                    <span class="text-gray-500 text-sm font-medium mb-2 block">Entidad emisora (Ej. Microsoft, CompTIA) | Año</span>
+                                    <p class="text-gray-400 text-sm">
+                                        [Añade aquí cualquier curso, diplomado o certificación relevante que tengas en tu perfil].
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Habilidades Clave (Skills) -->
+                    <div>
+                        <h4 class="text-white font-semibold mb-4">Áreas de Especialidad</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm text-gray-300">Soporte Técnico</span>
+                            <span class="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm text-gray-300">Sistemas Operativos (Windows/macOS)</span>
+                            <span class="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm text-gray-300">Actualización de Hardware</span>
+                            <span class="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm text-gray-300">Configuración de Nubes</span>
+                            <span class="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm text-gray-300">Consultoría de Compras TI</span>
+                            <span class="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm text-gray-300">Atención al Cliente</span>
+                            <span class="px-4 py-2 border border-primary/30 text-primary rounded-full text-sm">+ Añade más de tu LinkedIn</span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Sección Testimonios / Comentarios -->
+    <!-- Sección Testimonios -->
     <section id="testimonios" class="py-24 relative overflow-hidden">
-        <!-- Decoración de fondo -->
         <div class="bg-blob bg-secondary/10 w-full max-w-3xl h-96 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
-
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-16">
                 <h2 class="text-accent font-semibold tracking-wide uppercase text-sm mb-2">Experiencias reales</h2>
@@ -399,8 +530,6 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-                <!-- Testimonio 1 -->
                 <div class="bg-darker border border-white/10 rounded-2xl p-8 relative hover:border-primary/50 transition-colors">
                     <i class="ph-fill ph-quotes text-5xl text-white/5 absolute top-6 right-6"></i>
                     <div class="flex gap-1 text-accent mb-6">
@@ -422,7 +551,6 @@
                     </div>
                 </div>
 
-                <!-- Testimonio 2 -->
                 <div class="bg-darker border border-white/10 rounded-2xl p-8 relative hover:border-secondary/50 transition-colors md:-translate-y-4">
                     <i class="ph-fill ph-quotes text-5xl text-white/5 absolute top-6 right-6"></i>
                     <div class="flex gap-1 text-accent mb-6">
@@ -444,7 +572,6 @@
                     </div>
                 </div>
 
-                <!-- Testimonio 3 -->
                 <div class="bg-darker border border-white/10 rounded-2xl p-8 relative hover:border-accent/50 transition-colors">
                     <i class="ph-fill ph-quotes text-5xl text-white/5 absolute top-6 right-6"></i>
                     <div class="flex gap-1 text-accent mb-6">
@@ -465,21 +592,19 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- Sección CTA (Llamada a la acción) y Contacto -->
+    <!-- Sección CTA y Contacto -->
     <section id="contacto" class="py-24 bg-darker relative border-t border-white/5">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="bg-dark border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
-                <!-- Decoración fondo tarjeta -->
                 <div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
 
                 <div class="text-center mb-10 relative z-10">
                     <h3 class="text-3xl md:text-4xl font-bold mb-4">¿Listo para optimizar tu equipo?</h3>
-                    <p class="text-gray-400">Cuéntame qué necesitas y me pondré en contacto contigo lo antes posible para darte una solución.</p>
+                    <p class="text-gray-400">Cuéntame qué necesitas y me pondré en contacto contigo para darte una solución a medida.</p>
                 </div>
 
                 <form id="form-contacto" class="space-y-6 relative z-10" onsubmit="enviarFormulario(event)">
@@ -509,14 +634,13 @@
                     </button>
                 </form>
 
-                <!-- Mensaje de éxito oculto por defecto -->
                 <div id="success-message" class="hidden absolute inset-0 bg-dark/95 backdrop-blur-sm z-20 flex flex-col items-center justify-center rounded-3xl p-8 text-center transition-opacity duration-300">
                     <div class="w-20 h-20 bg-accent/20 rounded-full flex items-center justify-center mb-6">
                         <i class="ph-fill ph-check-circle text-5xl text-accent"></i>
                     </div>
                     <h4 class="text-2xl font-bold text-white mb-2">¡Mensaje Enviado!</h4>
                     <p class="text-gray-400 mb-6">Gracias por contactar a DDConsultory. Me pondré en contacto contigo pronto.</p>
-                    <button onclick="hideSuccessMessage()" class="px-6 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors">Cerrar</button>
+                    <button onclick="document.getElementById('success-message').classList.add('hidden')" class="px-6 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -531,23 +655,21 @@
             </div>
 
             <p class="text-gray-500 text-sm">
-                &copy; <span id="currentYear"></span> DDConsultory. Todos los derechos reservados.
+                &copy; <span id="currentYear"></span> Diego Trujillo Morales. Todos los derechos reservados.
             </p>
 
             <div class="flex space-x-4">
-                <a href="#" class="text-gray-500 hover:text-white transition-colors"><i class="ph-fill ph-whatsapp-logo text-2xl"></i></a>
+                <a href="https://wa.me/522291111365" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-white transition-colors"><i class="ph-fill ph-whatsapp-logo text-2xl"></i></a>
                 <a href="#" class="text-gray-500 hover:text-white transition-colors"><i class="ph-fill ph-envelope-simple text-2xl"></i></a>
-                <a href="#" class="text-gray-500 hover:text-white transition-colors"><i class="ph-fill ph-linkedin-logo text-2xl"></i></a>
+                <a href="https://www.linkedin.com/in/diego-trujillo-morales-1601a71a1/" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-white transition-colors"><i class="ph-fill ph-linkedin-logo text-2xl"></i></a>
             </div>
         </div>
     </footer>
 
     <!-- Scripts funcionales -->
     <script>
-        // Establecer el año actual en el footer
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-        // Lógica del menú móvil
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
         const icon = btn.querySelector('i');
@@ -563,7 +685,6 @@
             }
         });
 
-        // Cerrar menú móvil al hacer clic en un enlace
         const mobileLinks = menu.querySelectorAll('a');
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -573,7 +694,6 @@
             });
         });
 
-        // Efecto de Navbar al hacer scroll
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 20) {
@@ -585,28 +705,26 @@
             }
         });
 
-        // Función responsiva - Conexión Formulario a Pyhton
-         async function enviarFormulario(event) {
-            event.preventDefault(); // Evita que la página recargue
+        // Script para enviar datos a Python (Flask)
+        async function enviarFormulario(event) {
+            event.preventDefault();
 
             const form = document.getElementById('form-contacto');
             const msg = document.getElementById('success-message');
             const btn = form.querySelector('button[type="submit"]');
             const originalText = btn.innerHTML;
 
-            // Recolectar datos
             const datos = {
                 nombre: document.getElementById('name').value,
                 servicio: document.getElementById('service').value,
                 mensaje: document.getElementById('message').value
             };
 
-            // Animación de carga
             btn.innerHTML = '<i class="ph ph-spinner-gap animate-spin"></i> Enviando...';
             btn.disabled = true;
 
             try {
-                // Enviar datos a Python
+                // Aquí se comunica con la ruta /enviar_contacto de tu archivo app.py
                 const respuesta = await fetch('/enviar_contacto', {
                     method: 'POST',
                     headers: {
@@ -616,38 +734,17 @@
                 });
 
                 if(respuesta.ok) {
-                    msg.classList.remove('hidden'); // Mostrar mensaje de éxito
-                    form.reset(); // Limpiar formulario
+                    msg.classList.remove('hidden');
+                    form.reset();
                 }
             } catch (error) {
-                alert("Hubo un error al enviar el mensaje. Intenta de nuevo.");
+                alert("Hubo un error de conexión con el servidor. Intenta de nuevo más tarde.");
             } finally {
                 btn.innerHTML = originalText;
                 btn.disabled = false;
             }
         }
 
-
-            // Simular tiempo de carga
-            const btn = form.querySelector('button[type="submit"]');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="ph ph-spinner-gap animate-spin"></i> Enviando...';
-            btn.disabled = true;
-
-            setTimeout(() => {
-                msg.classList.remove('hidden');
-                form.reset();
-                btn.innerHTML = originalText;
-                btn.disabled = false;
-            }, 1000);
-        }
-
-        function hideSuccessMessage() {
-            const msg = document.getElementById('success-message');
-            msg.classList.add('hidden');
-        }
-
-        // Intercepción simple de enlaces ancla para scroll suave con offset
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -656,7 +753,7 @@
 
                 const targetElement = document.querySelector(targetId);
                 if(targetElement) {
-                    const headerOffset = 80; // Altura del navbar fijo
+                    const headerOffset = 80;
                     const elementPosition = targetElement.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
