@@ -296,7 +296,7 @@
         </div>
     </section>
 
-    <!-- Sección Productos Recomendados (NUEVA) -->
+    <!-- Sección Productos Recomendados -->
     <section id="productos" class="py-24 relative bg-darker border-t border-white/5 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
@@ -379,12 +379,12 @@
         </div>
     </section>
 
-    <!-- Sección Sobre Mí (Actualizada con Perfil Profesional) -->
+    <!-- Sección Sobre Mí (Curriculum Visual) -->
     <section id="sobre-mi" class="py-24 relative bg-darker border-y border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
 
-                <!-- Columna Izquierda: Perfil Visual y Contacto (Ocupa 4 columnas en desktop) -->
+                <!-- Columna Izquierda: Perfil Visual y Contacto (Ocupa 4 columnas) -->
                 <div class="lg:col-span-4 relative group sticky top-24">
                     <div class="absolute -inset-1 bg-gradient-to-b from-primary/50 to-secondary/30 rounded-3xl blur-md opacity-25 group-hover:opacity-50 transition duration-1000"></div>
                     <div class="relative bg-dark p-8 rounded-3xl border border-white/10 flex flex-col items-center text-center shadow-2xl">
@@ -400,7 +400,7 @@
 
                         <!-- Botones de Contacto Rápidos -->
                         <div class="w-full space-y-3">
-                            <!-- Botón WhatsApp (Actualizado con tu número) -->
+                            <!-- Botón WhatsApp -->
                             <a href="https://wa.me/522291111365" target="_blank" rel="noopener noreferrer" class="w-full flex items-center justify-center gap-3 px-6 py-3.5 bg-[#25D366]/10 hover:bg-[#25D366] border border-[#25D366]/30 hover:border-[#25D366] text-[#25D366] hover:text-white rounded-xl font-medium transition-all group shadow-sm">
                                 <i class="ph-fill ph-whatsapp-logo text-2xl group-hover:scale-110 transition-transform"></i>
                                 Chatear en WhatsApp
@@ -421,7 +421,7 @@
                     </div>
                 </div>
 
-                <!-- Columna Derecha: Información Profesional (Ocupa 8 columnas en desktop) -->
+                <!-- Columna Derecha: Información Profesional (Ocupa 8 columnas) -->
                 <div class="lg:col-span-8 space-y-12">
 
                     <!-- Sobre mí - Resumen -->
@@ -456,7 +456,7 @@
                                     </p>
                                 </div>
 
-                                <!-- Ítem de Experiencia 2 (Ejemplo, por favor reemplaza con tu info de LinkedIn) -->
+                                <!-- Ítem de Experiencia 2 -->
                                 <div class="relative pl-6 border-l-2 border-primary/30">
                                     <div class="absolute w-3 h-3 bg-darker border-2 border-primary rounded-full -left-[7px] top-1.5"></div>
                                     <h5 class="text-white font-semibold text-lg">Especialista en Soporte TI</h5>
@@ -478,7 +478,7 @@
                             </div>
 
                             <div class="space-y-6">
-                                <!-- Ítem de Educación (Reemplaza con tu título) -->
+                                <!-- Ítem de Educación -->
                                 <div class="relative pl-6 border-l-2 border-secondary/30 pb-2">
                                     <div class="absolute w-3 h-3 bg-secondary rounded-full -left-[7px] top-1.5"></div>
                                     <h5 class="text-white font-semibold text-lg">Licenciatura / Ingeniería en...</h5>
@@ -488,7 +488,7 @@
                                     </p>
                                 </div>
 
-                                <!-- Certificación (Ejemplo) -->
+                                <!-- Certificación -->
                                 <div class="relative pl-6 border-l-2 border-secondary/30">
                                     <div class="absolute w-3 h-3 bg-darker border-2 border-secondary rounded-full -left-[7px] top-1.5"></div>
                                     <h5 class="text-white font-semibold text-lg">Certificación Técnica</h5>
@@ -705,7 +705,7 @@
             }
         });
 
-        // Script para enviar datos a Python (Flask)
+        // Script actualizado para manejar errores del servidor Python
         async function enviarFormulario(event) {
             event.preventDefault();
 
@@ -724,7 +724,6 @@
             btn.disabled = true;
 
             try {
-                // Aquí se comunica con la ruta /enviar_contacto de tu archivo app.py
                 const respuesta = await fetch('/enviar_contacto', {
                     method: 'POST',
                     headers: {
@@ -733,12 +732,20 @@
                     body: JSON.stringify(datos)
                 });
 
+                const data = await respuesta.json(); // Leer lo que nos manda Python
+
                 if(respuesta.ok) {
+                    // Si el servidor devolvió status 200 (éxito)
                     msg.classList.remove('hidden');
                     form.reset();
+                } else {
+                    // Si el servidor devolvió un error (400, 500)
+                    alert("No se pudo enviar el mensaje:\n" + (data.message || "Error desconocido en el servidor."));
                 }
             } catch (error) {
-                alert("Hubo un error de conexión con el servidor. Intenta de nuevo más tarde.");
+                // Esto solo pasa si se pierde la conexión a internet completamente
+                alert("Error de conexión. Revisa tu internet e intenta de nuevo.");
+                console.error(error);
             } finally {
                 btn.innerHTML = originalText;
                 btn.disabled = false;

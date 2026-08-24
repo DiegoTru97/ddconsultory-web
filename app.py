@@ -8,35 +8,32 @@ app = Flask(__name__)
 
 @app.route('/')
 def inicio():
-    # Carga tu página principal
     return render_template('index.html')
 
 
 @app.route('/enviar_contacto', methods=['POST'])
 def contacto():
+    print("--- NUEVA SOLICITUD DE CONTACTO ---")
     try:
-        # Extraemos los datos que nos envía el JavaScript
         datos = request.get_json()
         nombre = datos.get('nombre')
         servicio = datos.get('servicio')
         mensaje = datos.get('mensaje')
 
-        # 1. Validación básica de seguridad (evita enviar correos vacíos)
         if not nombre or not mensaje:
+            print("Error: Datos incompletos enviados por el cliente.")
             return jsonify({"status": "error", "message": "Datos incompletos"}), 400
 
-        # 2. Configuración de credenciales de correo desde las variables de Render
-        # NUNCA se ponen las contraseñas directamente en el código por seguridad.
         remitente = os.environ.get('EMAIL_USER')
         password = os.environ.get('EMAIL_PASS')
         destinatario = 'diegotru1230@gmail.com'
 
-        # Si aún no configuras las contraseñas en Render, solo imprime en consola
         if not remitente or not password:
-            print(f"MENSAJE SIMULADO (Faltan credenciales): De {nombre} - {mensaje}")
-            return jsonify({"status": "success", "message": "Simulado correctamente"})
+            print(f"MENSAJE SIMULADO (Faltan credenciales en Render): De {nombre} - {mensaje}")
+            return jsonify({"status": "success", "message": "Simulado correctamente. (Faltan credenciales)"}), 200
 
-        # 3. Construcción del correo electrónico
+        print(f"Preparando correo de {nombre} usando la cuenta {remitente}...")
+
         msg = EmailMessage()
         msg['Subject'] = f'Nueva solicitud en DDConsultory: {servicio}'
         msg['From'] = remitente
@@ -56,19 +53,30 @@ def contacto():
         """
         msg.set_content(cuerpo_correo)
 
-        # 4. Envío seguro del correo usando el servidor de Gmail
-        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+        print("Intentando conectar con smtp.gmail.com por el puerto 465 (SSL)...")
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465, timeout=10) as smtp:
+            print("Conexión SMTP exitosa. Intentando login...")
             smtp.login(remitente, password)
+            print("Login exitoso. Enviando mensaje...")
             smtp.send_message(msg)
+            print("¡Mensaje enviado al servidor de Gmail exitosamente!")
 
-        print("Correo enviado exitosamente.")
-        return jsonify({"status": "success", "message": "Mensaje recibido correctamente"})
+        return jsonify({"status": "success", "message": "Mensaje recibido correctamente"}), 200
 
+    except smtplib.SMTPAuthenticationError as e:
+        print(f"ERROR DE AUTENTICACIÓN (Contraseña incorrecta o bloqueada por Google): {e}")
+        return jsonify(
+            {"status": "error", "message": "Error de autenticación con el correo. Verifica las contraseñas."}), 500
+    except smtplib.SMTPException as e:
+        print(f"ERROR SMTP: {e}")
+        return jsonify({"status": "error", "message": "Error de conexión con el servidor de correos."}), 500
     except Exception as e:
-        print(f"Error enviando correo: {e}")
-        return jsonify({"status": "error", "message": "Hubo un problema al procesar la solicitud"}), 500
+        print(f"ERROR GENERAL INESPERADO: {e}")
+        return jsonify({"status": "error", "message": "Hubo un problema interno en el servidor."}), 500
+    finally:
+        print("--- FIN DE LA SOLICITUD ---")
 
 
 if __name__ == '__main__':
-    print("Iniciando el servidor...")
+    print("Iniciando el servidor en modo Debug...")
     app.run(debug=True, port=5000)
